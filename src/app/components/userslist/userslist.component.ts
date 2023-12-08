@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User, UserListData } from 'src/app/data/userdat';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-userslist',
@@ -19,6 +20,8 @@ export class UserslistComponent {
     available: false,
   };
 
+  constructor(private toastr: ToastrService) {}
+
   ngOnInit() {
     this.perfomSearch();
   }
@@ -36,7 +39,7 @@ export class UserslistComponent {
       });
       user.team_member = true;
     }else if(!user.available){
-      window.alert('User is unavailable')
+      this.toastr.warning('User is unavailable')
     }
   }
 

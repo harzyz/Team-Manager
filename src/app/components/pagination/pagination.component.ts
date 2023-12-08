@@ -41,6 +41,5 @@ export class PaginationComponent {
       this.currentPage++;
       this.changePage.emit(this.currentPage);
     }
-    console.log(this.currentPage)
   }
 }
