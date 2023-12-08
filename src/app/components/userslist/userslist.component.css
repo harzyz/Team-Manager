@@ -1,0 +1,79 @@
+main{
+  width: 100%;
+  padding: 30px;
+  height: 100%;
+  background-color: #dbffea;
+  color: #001f0c;
+  font-family: 'Poppins';
+}
+.userlist{
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.userlist ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.userlistitem{
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  background-color: #018935;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.profiledetails{
+  display: flex;
+  gap: 10px;
+}
+.active{
+  background-color: #0289e3;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+.inactive{
+  background-color: tomato;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+.profiledetails img{
+  background-color: #58e0fe;
+  border-radius: 50%;
+  padding: 5px;
+}
+.profiledetails h3{
+  margin: 0;
+}
+.profiledetails p{
+  margin: 0;
+}
+.profileinfo{
+  display: flex;
+  flex-direction: column;
+  /* gap: 15px; */
+}
+.profileinfo p{
+  margin: 0;
+  border:none;
+}
+@media screen and (max-width: 500px) {
+  .userlist{
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+  .selectedclass{
+    display: flex;
+    flex-direction: column;
+  }
+  .userlistitem{
+    font-size: 12px;
+  }
+  .profiledetails{
+    flex-direction: column;
+    align-items: center;
+  }
+}

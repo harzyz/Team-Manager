@@ -1,0 +1,76 @@
+<main>
+  <section class="selectedclass">
+    <h2>Selected Team Members</h2>
+    <div *ngFor="let user of userlist">
+      <div *ngIf="user.team_member">
+        {{ user.first_name }}{{ user.last_name }}, Domain: {{ user.domain }}
+      </div>
+    </div>
+    <input
+      type="text"
+      (input)="perfomSearch()"
+      placeholder="search"
+      [(ngModel)]="searchText"
+    />
+    <h4>Filters</h4>
+    <select [(ngModel)]="filteredusers.gender">
+      <option value="" disabled selected>Choose Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <select [(ngModel)]="filteredusers.domain">
+      <option value="" disabled selected>Choose Domain</option>
+      <option value="IT">IT</option>
+      <option value="Marketing">Marketing</option>
+      <option value="Finance">Finance</option>
+      <option value="Sales">Sales</option>
+      <option value="Management">Management</option>
+      <option value="Business Development">Business Development</option>
+      <option value="UI Designing">UI Designing</option>
+    </select>
+    <input type="checkbox" [(ngModel)]="filteredusers.available" />
+    <button (click)="applyfilters()">Apply Filters</button>
+  </section>
+  <div class="userlist">
+    <ul
+      *ngFor="
+        let user of filteredlist.slice(
+          (currentPage - 1) * limit,
+          currentPage * limit
+        )
+      "
+    >
+      <li class="userlistitem">
+        <div class="profiledetails">
+          <span>
+            <img src="{{ user.avatar }}" alt="" />
+          </span>
+          <span class="profileinfo">
+            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+            <p>{{ user.gender }}</p>
+            <p>Domain: {{ user.domain }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p
+              [class.active]="user.available"
+              [class.inactive]="!user.available"
+            >
+              {{ user.available ? "Available" : "Unavailable" }}
+            </p>
+            <button
+              (click)="selectUserForTeam(user)"
+              [disabled]="user.teamMember"
+            >
+              Select for Team
+            </button>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <app-pagination
+    [limit]="limit"
+    [currentPage]="currentPage"
+    (changePage)="changePage($event)"
+  >
+  </app-pagination>
+</main>
