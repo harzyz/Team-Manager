@@ -8,6 +8,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatIconModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],

@@ -13,6 +13,8 @@ export class UserslistComponent {
   limit = 20;
   userlist: User[] = UserListData;
   filteredlist: any = [];
+  float:boolean = false;
+  filtershow:boolean = false
 
   filteredusers: { gender: string; domain: string; available: boolean } = {
     gender: '',
@@ -27,17 +29,48 @@ export class UserslistComponent {
   }
   changePage(page: number): void {
     this.currentPage = page;
-    console.log(this.currentPage);
+    // console.log(this.currentPage);
+  }
+  getSelectedTeamMembers()
+  : any[] {
+    return this.userlist.filter(user => user.team_member);
   }
 
+  togglefilter(){
+    this.filtershow = !this.filtershow
+  }
+
+  // selectUserForTeam(user: User): void {
+  //   if (user.available && !user.team_member) {
+  //     this.userlist.forEach(u => {
+  //       if (u.domain === user.domain) {
+  //         u.team_member = false;
+  //       }
+  //     });
+  //     user.team_member = true;
+  //     this.float = true
+  //   }else if(!user.available){
+  //     this.toastr.warning('User is unavailable')
+  //   }
+  //   console.log(user)
+  // }
   selectUserForTeam(user: User): void {
-    if (user.available && !user.team_member) {
-      this.userlist.forEach(u => {
-        if (u.domain === user.domain) {
-          u.team_member = false;
-        }
-      });
-      user.team_member = true;
+    if (user.available) {
+      if(user.team_member){
+        user.team_member = false
+        this.toastr.info('User is Removed')
+      } else {
+        const existingTeamMember = this.userlist.find(u => u.team_member && u.domain === user.domain);
+          if (existingTeamMember) {
+            this.toastr.warning('User with the same domain is already in the team');
+          }else{
+
+            user.team_member = true;
+            this.toastr.success('User added to the team');
+            this.float = true
+          }
+        ;
+      }
     }else if(!user.available){
       this.toastr.warning('User is unavailable')
     }
@@ -59,5 +92,6 @@ export class UserslistComponent {
       (this.filteredusers.gender === '' || user.gender === this.filteredusers.gender) &&
       (this.filteredusers.available === false || user.available === this.filteredusers.available)
     )
+    this.filtershow = false
   }
 }

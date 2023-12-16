@@ -1,35 +1,48 @@
+<nav *ngIf="float" class="position">
+  <h2>Selected Team Members</h2>
+  <div class="displaymates">
+    <div class="selectedteammate" *ngFor="let user of getSelectedTeamMembers()">
+      <h4>{{ user.first_name }} {{ user.last_name }}</h4> 
+      <p>Domain: {{ user.domain }}</p>
+    </div>
+  </div>        
+</nav>
 <main>
   <section class="selectedclass">
-    <h2>Selected Team Members</h2>
-    <div *ngFor="let user of userlist">
-      <div *ngIf="user.team_member">
-        {{ user.first_name }}{{ user.last_name }}, Domain: {{ user.domain }}
-      </div>
-    </div>
-    <input
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <input
+      class="searchinput"
       type="text"
       (input)="perfomSearch()"
-      placeholder="search"
+      placeholder="Search.."
       [(ngModel)]="searchText"
     />
-    <h4>Filters</h4>
-    <select [(ngModel)]="filteredusers.gender">
-      <option value="" disabled selected>Choose Gender</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-    <select [(ngModel)]="filteredusers.domain">
-      <option value="" disabled selected>Choose Domain</option>
-      <option value="IT">IT</option>
-      <option value="Marketing">Marketing</option>
-      <option value="Finance">Finance</option>
-      <option value="Sales">Sales</option>
-      <option value="Management">Management</option>
-      <option value="Business Development">Business Development</option>
-      <option value="UI Designing">UI Designing</option>
-    </select>
-    <input type="checkbox" [(ngModel)]="filteredusers.available" />
-    <button (click)="applyfilters()">Apply Filters</button>
+    <!-- <button (click)="togglefilter()" style="color: #FFF;">Filter Users</button> -->
+    <mat-icon (click)="togglefilter()" style="color: #FFF;" fontIcon="filter_list"></mat-icon>
+    </div>
+
+    <div *ngIf="filtershow" class="filterstab">
+      <select [(ngModel)]="filteredusers.gender">
+        <option value="" disabled selected>Choose Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <select [(ngModel)]="filteredusers.domain">
+        <option value="" disabled selected>Choose Domain</option>
+        <option value="IT">IT</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Finance">Finance</option>
+        <option value="Sales">Sales</option>
+        <option value="Management">Management</option>
+        <option value="Business Development">Business Development</option>
+        <option value="UI Designing">UI Designing</option>
+      </select>
+      <div style="display: flex; align-items: center;">
+        <input type="checkbox" [(ngModel)]="filteredusers.available" />
+        <label for="">Available Users Only</label>
+      </div>
+      <button (click)="applyfilters()">Apply Filters</button>
+    </div>
   </section>
   <div class="userlist">
     <ul
@@ -50,18 +63,22 @@
             <p>{{ user.gender }}</p>
             <p>Domain: {{ user.domain }}</p>
             <p>Email: {{ user.email }}</p>
+           <div class="actions">
             <p
-              [class.active]="user.available"
-              [class.inactive]="!user.available"
-            >
-              {{ user.available ? "Available" : "Unavailable" }}
-            </p>
-            <button
-              (click)="selectUserForTeam(user)"
-              [disabled]="user.teamMember"
-            >
-              Select for Team
-            </button>
+            [class.active]="user.available"
+            [class.inactive]="!user.available"
+          >
+            {{ user.available ? "Available" : "Unavailable" }}
+          </p>
+          <button
+            (click)="selectUserForTeam(user)"
+            [disabled]="user.teamMember"
+            [class.remove]="user.team_member"
+            [class.selected]="!user.team_member"
+          >
+          {{ user.team_member ? 'x' : '+' }}
+          </button>
+           </div>
           </span>
         </div>
       </li>
