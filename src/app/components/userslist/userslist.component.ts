@@ -15,6 +15,7 @@ export class UserslistComponent {
   filteredlist: any = [];
   float:boolean = false;
   filtershow:boolean = false
+  mobilebagecontrol:boolean = true
 
   filteredusers: { gender: string; domain: string; available: boolean } = {
     gender: '',
@@ -40,6 +41,10 @@ export class UserslistComponent {
     this.filtershow = !this.filtershow
   }
 
+  teamShow(){
+    this.mobilebagecontrol = !this.mobilebagecontrol
+  }
+
   // selectUserForTeam(user: User): void {
   //   if (user.available && !user.team_member) {
   //     this.userlist.forEach(u => {
@@ -54,6 +59,13 @@ export class UserslistComponent {
   //   }
   //   console.log(user)
   // }
+
+  removeteammemeber(user: User){
+    if(user.team_member){
+      user.team_member = false
+      this.toastr.info('User is Removed')
+    }
+  }
   selectUserForTeam(user: User): void {
     if (user.available) {
       if(user.team_member){

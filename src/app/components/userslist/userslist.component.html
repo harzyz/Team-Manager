@@ -1,24 +1,58 @@
 <nav *ngIf="float" class="position">
-  <h2>Selected Team Members</h2>
-  <div class="displaymates">
-    <div class="selectedteammate" *ngFor="let user of getSelectedTeamMembers()">
-      <h4>{{ user.first_name }} {{ user.last_name }}</h4> 
+  <div style="display: flex;">
+    <h2 style="color: #fff">Selected Team Members</h2>
+    <div *ngFor="let user of getSelectedTeamMembers()" (click)="teamShow()" class="firsteverbadgeinmylife">
+      <mat-icon
+        [matBadge]="getSelectedTeamMembers().length"
+        matBadgeColor="accent"
+        fontIcon="person"
+      ></mat-icon>
+    </div>
+  </div>
+  <div style="position: relative" class="displaymates">
+    <div
+      style="position: relative"
+      [class.selectedshy]="!mobilebagecontrol"
+      [class.selectedteammate]="mobilebagecontrol"
+      *ngFor="let user of getSelectedTeamMembers()">
+      <mat-icon
+        (click)="removeteammemeber(user)"
+        style="color: #ff0000; position: absolute; top: 5px; right: 5px"
+        fontIcon="cancel"
+      ></mat-icon>
+      <h4>{{ user.first_name }} {{ user.last_name }}</h4>
       <p>Domain: {{ user.domain }}</p>
     </div>
-  </div>        
+    <button
+      [disabled]="getSelectedTeamMembers().length !== 7"
+      style="
+        border: none;
+        background-color: green;
+        padding: 10px;
+        border-radius: 8px;
+      "
+      (click)="float = false"
+    >
+      Confirm
+    </button>
+  </div>
 </nav>
 <main>
   <section class="selectedclass">
-    <div style="display: flex; align-items: center; gap: 40px;">
+    <div style="display: flex; align-items: center; gap: 40px">
       <input
-      class="searchinput"
-      type="text"
-      (input)="perfomSearch()"
-      placeholder="Search.."
-      [(ngModel)]="searchText"
-    />
-    <!-- <button (click)="togglefilter()" style="color: #FFF;">Filter Users</button> -->
-    <mat-icon (click)="togglefilter()" style="color: #FFF;" fontIcon="filter_list"></mat-icon>
+        class="searchinput"
+        type="text"
+        (input)="perfomSearch()"
+        placeholder="Search.."
+        [(ngModel)]="searchText"
+      />
+      <!-- <button (click)="togglefilter()" style="color: #FFF;">Filter Users</button> -->
+      <mat-icon
+        (click)="togglefilter()"
+        style="color: #fff"
+        fontIcon="filter_list"
+      ></mat-icon>
     </div>
 
     <div *ngIf="filtershow" class="filterstab">
@@ -37,7 +71,7 @@
         <option value="Business Development">Business Development</option>
         <option value="UI Designing">UI Designing</option>
       </select>
-      <div style="display: flex; align-items: center;">
+      <div style="display: flex; align-items: center">
         <input type="checkbox" [(ngModel)]="filteredusers.available" />
         <label for="">Available Users Only</label>
       </div>
@@ -63,22 +97,22 @@
             <p>{{ user.gender }}</p>
             <p>Domain: {{ user.domain }}</p>
             <p>Email: {{ user.email }}</p>
-           <div class="actions">
-            <p
-            [class.active]="user.available"
-            [class.inactive]="!user.available"
-          >
-            {{ user.available ? "Available" : "Unavailable" }}
-          </p>
-          <button
-            (click)="selectUserForTeam(user)"
-            [disabled]="user.teamMember"
-            [class.remove]="user.team_member"
-            [class.selected]="!user.team_member"
-          >
-          {{ user.team_member ? 'x' : '+' }}
-          </button>
-           </div>
+            <div class="actions">
+              <p
+                [class.active]="user.available"
+                [class.inactive]="!user.available"
+              >
+                {{ user.available ? "Available" : "Unavailable" }}
+              </p>
+              <button
+                (click)="selectUserForTeam(user)"
+                [disabled]="user.teamMember"
+                [class.remove]="user.team_member"
+                [class.selected]="!user.team_member"
+              >
+                {{ user.team_member ? "x" : "+" }}
+              </button>
+            </div>
           </span>
         </div>
       </li>

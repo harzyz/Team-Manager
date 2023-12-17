@@ -118,6 +118,17 @@ main{
   margin: 0;
   border:none;
 }
+.firsteverbadgeinmylife{
+  background-color: #FFF;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  border-radius: 50%;
+}
 .position{
   position: fixed;
   top: 15px;
@@ -130,10 +141,12 @@ main{
 }
 .selectedteammate{
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   background-color: #dbffea;
-  width: fit-content;
-  padding: 15px;
+  /* width: fit-content; */
+  align-items: center;
+  gap: 10px;
+  padding: 8px 30px 8px 5px;
   border-radius: 10px;
   font-family: 'Poppins';
   /* border: 2px solid red; */
@@ -146,21 +159,37 @@ main{
 }
 .displaymates{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 10px;
   /* border: 2px solid red; */
 }
 .v{
   border: 2px solid green;
 }
 @media screen and (max-width: 500px) {
+  main{
+    padding: 10px;
+  }
+  .position{
+    top: 50px;
+    width: 100%;
+  }
   .userlist{
     grid-template-columns: 1fr;
     margin-top: 30px;
   }
+  .displaymates{
+    grid-template-columns: 1fr;
+  }
   .selectedclass{
     display: flex;
     flex-direction: column;
+  }
+  .selectedteammate{
+    display: block;
+  }
+  .selectedshy{
+    display: none;
   }
   .userlistitem{
     font-size: 12px;
