@@ -15,7 +15,7 @@ export class UserslistComponent {
   filteredlist: any = [];
   float:boolean = false;
   filtershow:boolean = false
-  mobilebagecontrol:boolean = true
+  mobilebagecontrol:boolean = false
 
   filteredusers: { gender: string; domain: string; available: boolean } = {
     gender: '',
