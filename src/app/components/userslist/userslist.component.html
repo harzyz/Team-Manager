@@ -12,8 +12,7 @@
   <div style="position: relative" class="displaymates">
     <div
       style="position: relative"
-      [class.selectedshy]="!mobilebagecontrol"
-      [class.selectedteammate]="mobilebagecontrol"
+      class="selectedteammate"
       *ngFor="let user of getSelectedTeamMembers()">
       <mat-icon
         (click)="removeteammemeber(user)"
@@ -37,9 +36,11 @@
     </button>
   </div>
 </nav>
+
+
 <main>
   <section class="selectedclass">
-    <div style="display: flex; align-items: center; gap: 40px">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
       <input
         class="searchinput"
         type="text"
@@ -47,7 +48,6 @@
         placeholder="Search.."
         [(ngModel)]="searchText"
       />
-      <!-- <button (click)="togglefilter()" style="color: #FFF;">Filter Users</button> -->
       <mat-icon
         (click)="togglefilter()"
         style="color: #fff"
@@ -124,4 +124,40 @@
     (changePage)="changePage($event)"
   >
   </app-pagination>
+
+  <div *ngIf="float">
+    <div *ngIf="mobilebagecontrol" class="subidea">
+      <div class="teammateselected"
+        *ngFor="let user of getSelectedTeamMembers()">
+        <mat-icon
+        class="cancelicon"
+          (click)="removeteammemeber(user)"
+          fontIcon="cancel"
+        ></mat-icon>
+        <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+        <p>Domain: {{ user.domain }}</p>
+      </div>
+      <button
+        [disabled]="getSelectedTeamMembers().length !== 7"
+        style="
+          border: none;
+          background-color: green;
+          padding: 10px;
+          border-radius: 8px;
+        "
+        (click)="float = false"
+      >
+        <mat-icon fontIcon="check"></mat-icon>
+      </button>
+    </div>
+    <div class="idea" *ngFor="let user of getSelectedTeamMembers()" >
+      <h3>Selected Teammates</h3>
+      <mat-icon 
+        [matBadge]="getSelectedTeamMembers().length" 
+        matBadgeColor="accent"
+        fontIcon="person"
+        (click)="teamShow()"
+      ></mat-icon>
+    </div>
+  </div>
 </main>

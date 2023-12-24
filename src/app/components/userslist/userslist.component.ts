@@ -30,7 +30,6 @@ export class UserslistComponent {
   }
   changePage(page: number): void {
     this.currentPage = page;
-    // console.log(this.currentPage);
   }
   getSelectedTeamMembers()
   : any[] {
@@ -45,27 +44,13 @@ export class UserslistComponent {
     this.mobilebagecontrol = !this.mobilebagecontrol
   }
 
-  // selectUserForTeam(user: User): void {
-  //   if (user.available && !user.team_member) {
-  //     this.userlist.forEach(u => {
-  //       if (u.domain === user.domain) {
-  //         u.team_member = false;
-  //       }
-  //     });
-  //     user.team_member = true;
-  //     this.float = true
-  //   }else if(!user.available){
-  //     this.toastr.warning('User is unavailable')
-  //   }
-  //   console.log(user)
-  // }
-
   removeteammemeber(user: User){
     if(user.team_member){
       user.team_member = false
       this.toastr.info('User is Removed')
     }
   }
+  
   selectUserForTeam(user: User): void {
     if (user.available) {
       if(user.team_member){

@@ -139,6 +139,9 @@ main{
   border-radius: 15px;
   background-color: rgb(0, 0, 0,  0.1);
 }
+.idea, .subidea{
+  display: none;
+}
 .selectedteammate{
   display: flex;
   /* flex-direction: column; */
@@ -163,6 +166,12 @@ main{
   gap: 10px;
   /* border: 2px solid red; */
 }
+.cancelicon{
+  color: #ff0000; 
+  position: absolute; 
+  top: 5px; 
+  right: 5px
+}
 .v{
   border: 2px solid green;
 }
@@ -171,8 +180,7 @@ main{
     padding: 10px;
   }
   .position{
-    top: 50px;
-    width: 100%;
+    display: none;
   }
   .userlist{
     grid-template-columns: 1fr;
@@ -197,5 +205,42 @@ main{
   .profiledetails{
     flex-direction: column;
     align-items: center;
+  }
+  .idea{
+    background-color: rgb(0, 0, 0,  0.1);
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  .teammateselected{
+    background-color: #58e0fe;
+    border-radius: 10px;
+    padding: 0px 10px;
+  }
+  .teammateselected h4, p{
+    margin: 0;
+  }
+  .subidea{
+    display: block;
+    width: 100%;
+    position: fixed;
+    padding: 0px 10px;
+    bottom: 70px;
+    left: 0;
+    color: #FFF;
+  }
+  .filterstab{
+    top: 50px;
+    left: 20%;
+  }
+  .cancelicon{
+    top: 5px; 
+    right: 15px
   }
 }
